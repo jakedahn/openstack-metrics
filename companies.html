@@ -51,17 +51,7 @@
     <div class="container">  
     
       <div class="row">
-        <div class="span4">
-          <h3>Projects</h3>
-          <ul>
-            <li><a href="#">Nova</a></li>
-            <li><a href="#">Glance</a></li>
-            <li><a href="#">Keystone</a></li>
-            <li><a href="#">Horizon</a></li>
-            <li><a href="#">Quantum</a></li>
-            <li><a href="#">Swift</a></li>
-          </ul>
-        </div>
+        <div id="chart"></div>
 
       </div>
 
@@ -75,18 +65,76 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./assets/js/jquery.js"></script>
-    <script src="./assets/js/bootstrap-transition.js"></script>
-    <script src="./assets/js/bootstrap-alert.js"></script>
-    <script src="./assets/js/bootstrap-modal.js"></script>
-    <script src="./assets/js/bootstrap-dropdown.js"></script>
-    <script src="./assets/js/bootstrap-scrollspy.js"></script>
-    <script src="./assets/js/bootstrap-tab.js"></script>
-    <script src="./assets/js/bootstrap-tooltip.js"></script>
-    <script src="./assets/js/bootstrap-popover.js"></script>
-    <script src="./assets/js/bootstrap-button.js"></script>
-    <script src="./assets/js/bootstrap-collapse.js"></script>
-    <script src="./assets/js/bootstrap-carousel.js"></script>
-    <script src="./assets/js/bootstrap-typeahead.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/highcharts.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      var chart;
+      $(function(){
+            chart = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'chart',
+                    type: 'area'
+                },
+                title: {
+                    text: 'Community Contributions by Company'
+                },
+                xAxis: {
+                    type: "datetime",
+                    dateTimeLabelFormats: { // don't display the dummy year
+                        month: '%e',
+                        year: '%b'
+                    },
+                    labels: [
+                      Date.UTC(2011,  9, 27),
+                      Date.UTC(2011, 10, 10),
+                      Date.UTC(2011, 10, 18),
+                      Date.UTC(2011, 11,  2),
+                      Date.UTC(2011, 11,  9),
+                      Date.UTC(2011, 11, 16),
+                      Date.UTC(2011, 11, 28),
+                      Date.UTC(2011,  0,  1),
+                      Date.UTC(2011,  0,  8)
+                    ]
+                },
+                yAxis: {
+                    title: {
+                        text: 'Percentage of total contributions'
+                    },
+                    labels: {
+                        formatter: function() {
+                            return this.value +'%';
+                        }
+                    }
+                },
+                tooltip: {
+                    formatter: function() {
+                        return this.series.name +' contributed <b>'+
+                            Highcharts.numberFormat(this.y, 0) +'%</b><br/> for '+ Highcharts.dateFormat('%e. %b', this.x);
+                    }
+                },
+                plotOptions: {
+                    area: {
+                        pointStart: Date.UTC(2011,  1,  8),
+                        marker: {
+                            enabled: false,
+                            symbol: 'circle',
+                            radius: 2,
+                            states: {
+                                hover: {
+                                    enabled: true
+                                }
+                            }
+                        }
+                    }
+                },
+                series: [{name: 'Rackspace', data: [50, 45, 35, 40, 38, 43, 50, 37]},
+                         {name: 'HP', data: [10, 12, 10, 13, 10, 11, 12, 14]},
+                         {name: 'RedHat', data: [40, 43, 50, 47, 52, 46, 38, 49]}]
+            });
+      })
+    </script>
+
 
   </body>
 </html>
