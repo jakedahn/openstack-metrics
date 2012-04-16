@@ -1,0 +1,9 @@
+#cta {
+  margin: 0 auto;
+  width: 370px;
+}
+
+#cta a {
+  float: left;
+  margin-right: 25px;
+}
