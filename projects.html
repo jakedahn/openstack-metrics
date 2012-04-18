@@ -49,24 +49,40 @@
     </div>
 
     <div class="container">  
-    
+      <div class="alert">
+        <a class="close" data-dismiss="alert">×</a>
+        <p><span class="label label-warning">WARNING</span>This is a static proof of concept, not based on real data right now.</p>
+      </div>
+      
       <div class="row">
-        <div class="span4">
-          <h3>Projects</h3>
-          <ul>
-            <li><a href="#">Nova</a></li>
-            <li><a href="#">Glance</a></li>
-            <li><a href="#">Keystone</a></li>
-            <li><a href="#">Horizon</a></li>
-            <li><a href="#">Quantum</a></li>
-            <li><a href="#">Swift</a></li>
-          </ul>
+        <div id="chart"></div>
+        
+        <div id="meta">
+          <h3>Top Contributors</h3>
+          <dl>
+            <dt>Nova</dt>
+              <dd>Vishvananda Ishaya</dd>
+              <dd>Brian Waldon</dd>
+              <dd></dd>
+            <dt>Horizon</dt>
+              <dd>Gabriel Hurley</dd>
+              <dd>Jake Dahn</dd>
+              <dd>Tres Henry</dd>
+            <dt>other</dt>
+              <dd>name</dd>
+              <dd>goes</dd>
+              <dd>here</dd>
+          </dl>
         </div>
 
       </div>
 
       <footer>
         <p>This data is derived from the code itself, if you have any questions, feel free to email the mailing list.</p>
+        <div class="alert">
+          <a class="close" data-dismiss="alert">×</a>
+          <p><span class="label label-warning">WARNING</span>This is a static proof of concept, not based on real data right now.</p>
+        </div>
       </footer>
       
     </div>
@@ -76,6 +92,67 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="./assets/js/jquery.js"></script>
     <script src="./assets/js/bootstrap.min.js"></script>
+    <script src="./assets/js/highcharts.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+      var chart;
+      $(function(){
+        chart = new Highcharts.Chart({
+          chart: {
+            renderTo: 'chart',
+            type: 'column',
+            margin: [ 50, 50, 100, 80]
+          },
+          title: {
+            text: "Activity per project"
+          },
+          xAxis: {
+            categories: ['Nova', 'Swift', 'Glance', 'Horizon', 'Quantum', 'Keystone'],
+            labels: {
+              rotation: -45,
+              align: 'right',
+              style: {
+                font: 'normal 13px Verdana, sans-serif'
+              }
+            }
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: 'Amount of commits'
+            }
+          },
+          legend: {
+            enabled: false
+          },
+          tooltip: {
+            formatter: function() {
+              return '<b>'+ this.x +'</b><br/>'+
+                'commits merged: '+ this.y;
+            }
+          },
+            series: [{
+            name: 'Population',
+            data: [300, 128, 120, 70, 62, 20],
+            dataLabels: {
+              enabled: true,
+              rotation: -90,
+              color: '#FFFFFF',
+              align: 'right',
+              x: -3,
+              y: 10,
+              formatter: function() {
+                return this.y;
+              },
+              style: {
+                font: 'normal 13px Verdana, sans-serif'
+              }
+            }
+          }]
+        });
+      })
+    </script>
+
 
   </body>
 </html>
