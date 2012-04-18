@@ -7,3 +7,14 @@
   float: left;
   margin-right: 25px;
 }
+
+thead tr {
+  background: #F0F0F0;
+}
+
+footer {
+  border-top: 1px solid #e1e1e1;
+  padding-top: 25px;
+  margin-top: 25px;
+  color: #999;
+}
